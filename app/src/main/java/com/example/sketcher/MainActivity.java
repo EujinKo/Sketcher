@@ -6,15 +6,22 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.ContactsContract;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -120,13 +127,42 @@ public class MainActivity extends AppCompatActivity {
 
         intent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] { address });
         System.out.println(BuildConfig.APPLICATION_ID +".provider");
-        Uri uri = FileProvider.getUriForFile(this,
-                 BuildConfig.APPLICATION_ID + ".provider",
-                 new File("/A/B/C.png"));
+
+        Uri uri = saveImageToFile(drawingFragment.getDrawingView().getBitmap());
         intent.putExtra(android.content.Intent.EXTRA_STREAM, uri);
 
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         startActivity(intent);
     }
 
+    public Uri saveImageToFile(Bitmap bitmap){
+        //creates bitmap to draw on
+        Canvas canvas = new Canvas(bitmap);
+
+        Uri ImageUri=null;
+        try{
+            File imageFile = createImageFile();
+            FileOutputStream out = new FileOutputStream(imageFile);
+            bitmap.compress(Bitmap.CompressFormat.PNG,100,out);
+
+            //Saves the uri for the view group image file
+            ImageUri = FileProvider.getUriForFile(
+                    this,"com.example.Sketcher.FileProvider",
+                    imageFile);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return ImageUri;
+    }
+
+    // This function creates empty file directory to save image
+    private File createImageFile() throws Exception{
+        String timeStamp = new SimpleDateFormat(
+                "yyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_"+timeStamp+"_";
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(imageFileName,".jpg",storageDir);
+
+        return image;
+    }
 }
