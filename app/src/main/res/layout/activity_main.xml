@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:weightSum="4"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <Button
+            android:id="@+id/button_red"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+
+            android:onClick="changePaintColor"
+            android:background="@color/colorRed"/>
+
+        <Button
+            android:id="@+id/button_green"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+
+            android:onClick="changePaintColor"
+            android:background="@color/colorGreen"/>
+
+        <Button
+            android:id="@+id/button_blue"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+
+            android:onClick="changePaintColor"
+            android:background="@color/colorBlue"/>
+
+        <Button
+            android:id="@+id/button_purple"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+
+            android:onClick="changePaintColor"
+            android:background="@color/colorPurple"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:weightSum="5"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <Button
+            android:id="@+id/button_small"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+
+            android:onClick="changeBrushSize"
+
+            android:background="@color/colorSmallButton"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:text="@string/button_small"/>
+
+        <Button
+            android:id="@+id/button_medium"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+
+            android:onClick="changeBrushSize"
+
+            android:background="@color/colorMediumButton"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:text="@string/button_medium"/>
+
+        <Button
+            android:id="@+id/button_large"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+
+            android:onClick="changeBrushSize"
+
+            android:background="@color/colorLargeButton"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:text="@string/button_large"/>
+
+        <Button
+            android:id="@+id/button_clear"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+
+            android:onClick="clearDrawing"
+
+            android:background="@color/colorClearButton"
+            android:textColor="@color/colorWhite"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:text="@string/button_clear"/>
+
+        <Button
+            android:id="@+id/button_share"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+
+            android:background="@color/colorShareButton"
+            android:textColor="@color/colorWhite"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:text="@string/button_share"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/draw_view"
+        android:orientation="vertical"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>
