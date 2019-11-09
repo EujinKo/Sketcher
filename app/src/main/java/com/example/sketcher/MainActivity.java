@@ -12,10 +12,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.ContactsContract;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -64,6 +66,13 @@ public class MainActivity extends AppCompatActivity {
             dv.changePaintSize(size_arr[2]);
         }
     }
+
+    /**
+     * This function calls the contacts list fragment
+     *  which shows lists of contact and lets the user select
+     *  which person to share with
+     * @param v
+     */
     public void onClickShare(View v){
         ContactsFragment frag = new ContactsFragment();
         frag.setContainerActivity(this);
@@ -76,6 +85,10 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
     }
 
+    /**
+     * This function changes the paint brush color
+     * @param v
+     */
     public void changePaintColor(View v){
         DrawingView dv = drawingFragment.getDrawingView();
 
@@ -91,6 +104,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * This function clicks the contact and launches mail app
+     *  to share the bitmap image
+     * @param v
+     */
     public void clickContact(View v){
         ListView listView = (ListView) v.getParent();
         int contactId = listView.getPositionForView(v)+1;
@@ -108,9 +126,10 @@ public class MainActivity extends AppCompatActivity {
                     .getString(emails.getColumnIndex(
                             ContactsContract.CommonDataKinds.Email.ADDRESS));
             System.out.println(email);
-            emailsList.add(email);
-            launchMail(email);
-
+            if(!email.trim().equals("")){
+                emailsList.add(email);
+                launchMail(email);
+            }
         }
         emails.close();
 

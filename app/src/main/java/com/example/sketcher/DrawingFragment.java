@@ -43,9 +43,4 @@ public class DrawingFragment extends Fragment {
         return view;
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        System.out.println("destroyed drawing fragment");
-    }
 }
